@@ -9,28 +9,28 @@ import { authActions } from "../../store/auth";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-const Sidebar = () => {
+const Sidebar = ({ isSidebarOpen, setIsSidebarOpen }) => {
   const dispatch = useDispatch();
   const history = useNavigate();
   const data = [
     {
       title: "All tasks",
-      icon: <CgNotes />,
+      icon: <CgNotes className="text-2xl mr-3" />,
       link: "/",
     },
     {
       title: "Important task",
-      icons: <MdLabelImportant />,
+      icon: <MdLabelImportant className="text-2xl mr-3" />,
       link: "/importanttasks",
     },
     {
       title: "Incompleted tasks",
-      icons: <FaCheckDouble />,
+      icon: <FaCheckDouble className="text-2xl mr-3" />,
       link: "/incompletedtasks",
     },
     {
       title: "Completed tasks",
-      icons: <TbNotebookOff />,
+      icon: <TbNotebookOff className="text-2xl mr-3" />,
       link: "/completedtasks",
     },
   ];
@@ -41,8 +41,6 @@ const Sidebar = () => {
     localStorage.removeItem("id");
     localStorage.removeItem("token");
     toast.success("Successfully logged out!");
-    // Add a delay before navigating to allow the toast message to show
-
     history("/signup");
   };
   const headers = {
@@ -56,7 +54,6 @@ const Sidebar = () => {
           "http://localhost:8000/api/v2/get-all-tasks",
           { headers }
         );
-        console.log(response);
         setData(response.data.data);
       } catch (error) {
         toast.error("Failed to fetch tasks");
@@ -67,32 +64,40 @@ const Sidebar = () => {
     }
   }, []);
   return (
-    <>
+    <aside
+      className={`${
+        isSidebarOpen ? "block" : "hidden"
+      } w-full md:max-w-xs bg-gray-800 text-white p-4 md:block`}
+    >
       {Data && (
-        <div>
-          <h2 className="text-xl font-semibold ">{Data.username}</h2>
-          <h4 className="mb-1 text-gray-400">{Data.email}</h4>
-          <hr />
+        <div className="mb-4">
+          <h2 className="text-xl font-semibold">{Data.username}</h2>
+          <h4 className="text-gray-400">{Data.email}</h4>
+          <hr className="my-2" />
         </div>
       )}
-      <div>
+      <nav>
         {data.map((item, i) => (
           <Link
             to={item.link}
             key={i}
-            className="my-2 flex items-center hover: bg-gray-600 p-2 rounded transition-all duration-300"
+            className="flex items-center p-2 my-2 rounded hover:bg-gray-600 transition-all duration-300"
+            onClick={() => setIsSidebarOpen(false)} // Close sidebar on link click
           >
-            {item.icons}
+            <span className="mr-3 text-2xl">{item.icon}</span>
             {item.title}
           </Link>
         ))}
-      </div>
-      <div>
-        <button onClick={logout} className="bg-gray-600 w-full p-2 rounded">
+      </nav>
+      <div className="mt-4">
+        <button
+          onClick={logout}
+          className="bg-gray-600 w-full p-2 rounded hover:bg-gray-700 transition-all duration-300"
+        >
           Log Out
         </button>
       </div>
-    </>
+    </aside>
   );
 };
 

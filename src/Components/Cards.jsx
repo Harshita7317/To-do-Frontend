@@ -53,59 +53,60 @@ const Cards = ({ home, SetInputDiv, data, setUpdatedData }) => {
     setUpdatedData({ id: id, title: title, desc: desc });
   };
   return (
-    <>
-      <div className="grid grid-cols-3 gap-4 p-4">
-        {data &&
-          data.map((item, i) => (
-            <div className="flex flex-col justify-between bg-gray-700 rounded-sm p-4">
-              <div className="">
-                <h1 className="text-xl font-semihold">{item.title}</h1>
-                <p className="text-gray-300 my-2">{item.desc}</p>
-              </div>
-              <div className="mt-4 w-full flex items-center">
-                <button
-                  className={`${
-                    item.complete === false ? "bg-red-400" : "bg-green-700"
-                  } p-2 rounded`}
-                  onClick={() => handlecompleteTask(item._id)}
-                >
-                  {item.complete === true ? "Completed" : "Incomplete"}
-                </button>
-                <div className="text-white p-2 w-3/6 text-2xl font-semibold flex justify-around">
-                  <button onClick={() => handleImportantTask(item._id)}>
-                    {item.important === false ? (
-                      <CiHeart />
-                    ) : (
-                      <FaHeart className="text-red-500" />
-                    )}
-                  </button>
-                  {home !== "false" && (
-                    <button
-                      onClick={() =>
-                        handleUpdate(item._id, item.title, item.desc)
-                      }
-                    >
-                      <FaEdit />
-                    </button>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+      {data &&
+        data.map((item, i) => (
+          <div
+            key={i}
+            className="flex flex-col justify-between bg-gray-700 rounded-sm p-4"
+          >
+            <div>
+              <h1 className="text-xl font-semibold">{item.title}</h1>
+              <p className="text-gray-300 my-2">{item.desc}</p>
+            </div>
+            <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center">
+              <button
+                className={`${
+                  item.complete === false ? "bg-red-400" : "bg-green-700"
+                } p-2 rounded`}
+                onClick={() => handlecompleteTask(item._id)}
+              >
+                {item.complete === true ? "Completed" : "Incomplete"}
+              </button>
+              <div className="text-white p-2 w-full sm:w-auto flex justify-between sm:justify-around mt-2 sm:mt-0">
+                <button onClick={() => handleImportantTask(item._id)}>
+                  {item.important === false ? (
+                    <CiHeart className="text-2xl mr-3" />
+                  ) : (
+                    <FaHeart className="text-2xl mr-3 text-red-500" />
                   )}
-                  <button onClick={() => deleteTask(item._id)}>
-                    <MdDelete />
+                </button>
+                {home !== "false" && (
+                  <button
+                    onClick={() =>
+                      handleUpdate(item._id, item.title, item.desc)
+                    }
+                  >
+                    <FaEdit className="text-2xl mr-3" />
                   </button>
-                </div>
+                )}
+                <button onClick={() => deleteTask(item._id)}>
+                  <MdDelete className="text-2xl mr-3" />
+                </button>
               </div>
             </div>
-          ))}
-        {home === "true" && (
-          <button
-            className="flex flex-col justify-center items-center bg-gray-700 rounded-sm p-4 hover:scale-105 cursor-pointer transition-all duration-300"
-            onClick={() => SetInputDiv("fixed")}
-          >
-            <IoIosAddCircle className="text-5xl" />
-            <h2 className="text-2xl mt-4 ">Add Task</h2>
-          </button>
-        )}
-      </div>
-    </>
+          </div>
+        ))}
+      {home === "true" && (
+        <button
+          className="flex flex-col justify-center items-center bg-gray-700 rounded-sm p-4 hover:scale-105 cursor-pointer transition-all duration-300"
+          onClick={() => SetInputDiv("fixed")}
+        >
+          <IoIosAddCircle className="text-5xl" />
+          <h2 className="text-2xl mt-4">Add Task</h2>
+        </button>
+      )}
+    </div>
   );
 };
 

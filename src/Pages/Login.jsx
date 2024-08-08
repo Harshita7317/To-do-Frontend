@@ -46,44 +46,45 @@ const Login = () => {
     }
   };
   return (
-    <>
-      <div className="h-[98vh] flex items-center justify-center">
-        <div className="p-4 w-2/6 rounded bg-gray-800">
-          <div className="text-2xl font-semibold">Login</div>
-          <input
-            type="text"
-            placeholder="Username"
-            name="username"
-            onChange={change}
-            value={Data.username}
-            className="bg-gray-700 px-3 py-2 my-3 w-full rounded"
-          />
-
-          <input
-            type="password"
-            placeholder="password"
-            name="password"
-            required
-            onChange={change}
-            value={Data.password}
-            className="bg-gray-700 px-3 py-2 my-3 w-full rounded"
-          />
-          <div className="w-full flex items-center justify-between">
-            <button
-              className="bg-blue-500 text-xl font-semibold text-black px-3 py-2 rounded"
-              onClick={submit}
-            >
-              Login
-            </button>
-
-            <Link to="/signup" className="text-gray-400 hover:text-gray-200">
-              {" "}
-              Not having an account? Singup here
-            </Link>
-          </div>
+    <div className="h-screen flex items-center justify-center p-4">
+      <div className="p-6 w-full max-w-md bg-gray-800 rounded-lg">
+        <div className="text-2xl font-semibold mb-4">Login</div>
+        <input
+          type="text"
+          placeholder="Username"
+          name="username"
+          onChange={change}
+          value={Data.username}
+          className="bg-gray-700 text-white px-4 py-2 mb-4 w-full rounded"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          name="password"
+          required
+          onChange={change}
+          value={Data.password}
+          className="bg-gray-700 text-white px-4 py-2 mb-4 w-full rounded"
+        />
+        <div className="flex flex-col sm:flex-row sm:justify-between">
+          <button
+            className="bg-blue-500 text-xl font-semibold text-white px-4 py-2 rounded mb-4 sm:mb-0"
+            onClick={submit}
+          >
+            Login
+          </button>
+          <Link
+            to="/signup"
+            className="text-gray-400  mt-3 mr-4 hover:text-gray-200"
+          >
+            Not having an account?
+            <span className="ml-2 mt-4 font-semibold text-gray-100">
+              Signup here
+            </span>
+          </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

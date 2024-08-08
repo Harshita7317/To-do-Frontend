@@ -1,15 +1,30 @@
-import React from "react";
+// Home.js
+import React, { useState } from "react";
 import Sidebar from "../Components/Home/Sidebar";
+import Navbar from "../Components/Home/Navbar";
 import { Outlet } from "react-router-dom";
 
 const Home = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   return (
-    <div className="flex h-[98vh] gap-4">
-      <div className="w-1/6 border border-gray-500 rounded-xl p-4 flex flex-col justify-between">
-        <Sidebar />
-      </div>
-      <div className="w-5/6 border border-gray-500 rounded-xl p-4">
-        <Outlet />
+    <div className="flex flex-col h-screen">
+      <Navbar
+        isSidebarOpen={isSidebarOpen}
+        setIsSidebarOpen={setIsSidebarOpen}
+      />
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar
+          isSidebarOpen={isSidebarOpen}
+          setIsSidebarOpen={setIsSidebarOpen}
+        />
+        <div
+          className={`flex-1 p-4 ${
+            isSidebarOpen ? "ml-64" : "ml-0"
+          } transition-all duration-300 ease-in-out overflow-y-auto`}
+        >
+          <Outlet />
+        </div>
       </div>
     </div>
   );

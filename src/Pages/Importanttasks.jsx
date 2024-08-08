@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cards from "../Components/Cards";
-import { useEffect } from "react";
 import axios from "axios";
 
 const Importanttasks = () => {
-  const [Data, setData] = useState();
+  const [Data, setData] = useState([]);
   const headers = {
     id: localStorage.getItem("id"),
     authorization: `Bearer ${localStorage.getItem("token")}`,
   };
+
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get(
@@ -18,7 +18,7 @@ const Importanttasks = () => {
       setData(response.data.data);
     };
     fetch();
-  });
+  }, []);
 
   return (
     <div>

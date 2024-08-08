@@ -73,7 +73,7 @@ const InputData = ({ InputDiv, SetInputDiv, UpdatedData, setUpdatedData }) => {
       <div
         className={`${InputDiv} top-0 left-0 flex items-center justify-center h-screen w-full`}
       >
-        <div className="w-2/6 bg-gray-900 p-4 rounded">
+        <div className="w-11/12 md:w-2/3 lg:w-1/2 xl:w-1/3 bg-gray-900 p-4 rounded">
           <div className="flex justify-end">
             <button
               className="text-2xl"
