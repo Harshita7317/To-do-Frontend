@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.toastify-container {
+  @apply fixed z-50 top-0 right-0 m-4;
+}
+
+.toastify-toast {
+  @apply flex items-center p-4 mb-4 w-full max-w-xs text-white bg-blue-500 rounded-lg shadow-lg;
+}
